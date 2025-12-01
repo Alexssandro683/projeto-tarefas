@@ -3,6 +3,8 @@ package br.upe;
 import br.upe.ui.TelaPrincipal;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+
 
 public class Main {
     public static void main(String[] args) {

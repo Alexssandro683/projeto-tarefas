@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class TelaPrincipal {
     private JPanel pnlMain;
@@ -20,6 +21,7 @@ public class TelaPrincipal {
     private JPanel pnlAdicionar;
     private JTable tblTarefas;
     private JCheckBox chkExibirFinalizadas;
+
 
     private List<Tarefa> tarefas;
 
@@ -39,7 +41,7 @@ public class TelaPrincipal {
     }
 
     private void adicionarTarefa(String texto) {
-        Tarefa tarefa = new Tarefa(texto, tarefas.size());
+        Tarefa tarefa = new Tarefa(texto, tarefas.size(), 3);
         controlador.adicionarTarefaAtiva(tarefa);
         tblTarefas.revalidate();
         tblTarefas.repaint();
@@ -52,6 +54,7 @@ public class TelaPrincipal {
     private void createUIComponents() {
         controlador = new TarefaControlador();
         tblTarefas = new JTable(controlador.getTarefaTableModel());
+        tblTarefas.setDefaultRenderer(Object.class, new CorRenderer());
         tblTarefas.getColumnModel().getColumn(0).setMaxWidth(20);
     }
 

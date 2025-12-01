@@ -19,7 +19,8 @@ public class TarefaControlador {
 
     //Metodos de negocio
     public void adicionarTarefaAtiva(Tarefa tarefa) {
-        this.tarefaTableModel.getTarefasAtivas().add(tarefa);
+        this.tarefaTableModel.getTarefasAtivas().add(tarefa); //modificacao
+        this.tarefaTableModel.getTarefasAtivas().sort((t1,t2) -> Integer.compare(t1.getUrgencia(), t2.getUrgencia()));
     }
 
     public void exibirFinalizadas(boolean exibir) {

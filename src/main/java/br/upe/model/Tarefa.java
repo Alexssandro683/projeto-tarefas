@@ -11,11 +11,19 @@ public class Tarefa {
     private Boolean finalizada;
     private int ordem;
 
-    public Tarefa(String texto, int ordem) {
+
+
+    private int urgencia;
+
+    public Tarefa(String texto, int ordem, int urgencia) {
         this.dataCriacao = LocalDate.now();
         this.descricao = texto;
         this.ordem = ordem;
+        this.urgencia = urgencia;
     }
+    public int getUrgencia() { return urgencia; }
+
+    public void setUrgencia(int urgencia) { this.urgencia = urgencia; }
 
     public String getDescricao() {
         return descricao;

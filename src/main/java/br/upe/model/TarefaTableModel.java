@@ -9,6 +9,7 @@ import java.util.Vector;
 public class TarefaTableModel extends AbstractTableModel {
     private List<Tarefa> tarefasFinalizadas;
     private List<Tarefa> tarefasAtivas;
+    private String[] colunas = {"Descrição", "Vencimento", "Urgência"};
 
     private boolean exibirFinalizadas;
 
@@ -24,7 +25,7 @@ public class TarefaTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -33,6 +34,9 @@ public class TarefaTableModel extends AbstractTableModel {
         switch (columnIndex) {
             case 0 : return tarefa.isFinalizada();
             case 1 : return tarefa.getDescricao();
+            case 2 :
+                int j = tarefa.getUrgencia();
+                return (j == 1 ? "Alta": j == 2 ? "Médio": "Baixa");
         }
         return null;
     }
@@ -99,5 +103,7 @@ public class TarefaTableModel extends AbstractTableModel {
     public boolean isExibirFinalizadas() {
         return exibirFinalizadas;
     }
+
+    public Tarefa getTarefa(int row){ return tarefasAtivas.get(row); }
 
 }
