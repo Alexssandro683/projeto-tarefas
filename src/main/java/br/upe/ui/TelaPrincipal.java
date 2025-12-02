@@ -2,19 +2,13 @@ package br.upe.ui;
 
 import br.upe.controller.TarefaControlador;
 import br.upe.model.Tarefa;
-import br.upe.model.TarefaTableModel;
 import br.upe.model.CorRenderer;
 
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.table.DefaultTableCellRenderer;
 
 public class TelaPrincipal {
     private JPanel pnlMain;
@@ -45,7 +39,23 @@ public class TelaPrincipal {
             boolean selecionado = ((JCheckBox) e.getSource()).isSelected();
             controlador.exibirFinalizadas(selecionado);
         });
+
+
         tblTarefas.getColumnModel().getColumn(2).setCellRenderer(new CorRenderer());
+
+        //Alteração visual
+        txtDescricaoTarefa.putClientProperty("JComponent.roundRect", true);
+        txtDescricaoTarefa.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        btnAdicionarTarefa.setFocusPainted(false);
+        btnAdicionarTarefa.setBackground(new Color(60, 130, 200));
+        btnAdicionarTarefa.setForeground(Color.WHITE);
+        btnAdicionarTarefa.setBorder(BorderFactory.createEmptyBorder(8, 16, 8, 16));
+        pnlMain.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        pnlAdicionar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+
+
+
     }
 
     private void adicionarTarefa(String texto) {
@@ -72,10 +82,20 @@ public class TelaPrincipal {
     }
 
     private void createUIComponents() {
+
         controlador = new TarefaControlador();
         tblTarefas = new JTable(controlador.getTarefaTableModel());
+        tblTarefas.setRowHeight(28); // Linhas maiores
+        tblTarefas.setShowGrid(false); // remove grade feia
+        tblTarefas.setIntercellSpacing(new Dimension(0, 8)); // espaçamento
+        tblTarefas.setFont(new Font("Segoe UI", Font.PLAIN, 14)); // fonte moderna
+        tblTarefas.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+
+
         tblTarefas.setDefaultRenderer(Object.class, new CorRenderer());
         tblTarefas.getColumnModel().getColumn(0).setMaxWidth(20);
+
+
     }
 
 }
