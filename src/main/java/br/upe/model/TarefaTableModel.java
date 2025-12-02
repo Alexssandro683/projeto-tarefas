@@ -9,7 +9,7 @@ import java.util.Vector;
 public class TarefaTableModel extends AbstractTableModel {
     private List<Tarefa> tarefasFinalizadas;
     private List<Tarefa> tarefasAtivas;
-    private String[] colunas = {"Descrição", "Vencimento", "Urgência"};
+    private String[] colunas = {"CheckBox", "Descrição", "Urgência"};
 
     private boolean exibirFinalizadas;
 
@@ -45,6 +45,7 @@ public class TarefaTableModel extends AbstractTableModel {
         switch (c) {
             case 0 : return Boolean.class;
             case 1 : return String.class;
+            case 2 : return String.class;
         }
         return null;
     }

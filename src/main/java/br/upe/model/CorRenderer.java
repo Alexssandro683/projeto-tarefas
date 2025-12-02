@@ -9,11 +9,13 @@ public class CorRenderer extends DefaultTableCellRenderer{
 
     public Component getTableCellRendererComponent(
             JTable table,Object value, boolean isSelected, boolean hasFocus, int row, int col){
-        Component c = getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
-        TarefaTableModel model = (TarefaTableModel) table.getModel();
-        Tarefa tarefa = model.getTarefa(row);
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
 
-        if(!Seleceted){
+
+        if(col == 2){
+            TarefaTableModel model = (TarefaTableModel) table.getModel();
+            Tarefa tarefa = model.getTarefa(row);
+
             switch (tarefa.getUrgencia()){
                 case 1:
                     c.setBackground(Color.RED);
@@ -23,7 +25,12 @@ public class CorRenderer extends DefaultTableCellRenderer{
                     break;
                 case 3:
                     c.setBackground(Color.GREEN);
+                    break;
+                default:
+                    c.setBackground(Color.WHITE);
+
             }
+
         }
         return c;
     }
