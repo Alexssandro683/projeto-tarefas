@@ -3,7 +3,7 @@ package br.upe;
 import br.upe.ui.TelaPrincipal;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableCellRenderer; //pintar tabela
 
 
 public class Main {

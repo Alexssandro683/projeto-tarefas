@@ -6,6 +6,8 @@ import br.upe.model.TarefaTableModel;
 import javax.swing.event.TableModelListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class TarefaControlador {
 
@@ -21,6 +23,12 @@ public class TarefaControlador {
     public void adicionarTarefaAtiva(Tarefa tarefa) {
         this.tarefaTableModel.getTarefasAtivas().add(tarefa); //modificacao
         this.tarefaTableModel.getTarefasAtivas().sort((t1,t2) -> Integer.compare(t1.getUrgencia(), t2.getUrgencia()));
+    }
+
+    public void organizarPorUrgencia() {
+        List<Tarefa> tarefas = tarefaTableModel.getTarefasAtivas();
+        Collections.sort(tarefas, Comparator.comparingInt(Tarefa::getUrgencia));
+        tarefaTableModel.fireTableDataChanged();
     }
 
     public void exibirFinalizadas(boolean exibir) {

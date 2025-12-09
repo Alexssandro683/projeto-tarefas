@@ -10,9 +10,6 @@ public class Tarefa {
     private LocalDate dataVencimento;
     private Boolean finalizada;
     private int ordem;
-
-
-
     private int urgencia;
 
     public Tarefa(String texto, int ordem, int urgencia) {

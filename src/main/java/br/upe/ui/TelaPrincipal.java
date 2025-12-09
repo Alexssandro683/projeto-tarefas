@@ -18,57 +18,71 @@ public class TelaPrincipal {
     private JTable tblTarefas;
     private JCheckBox chkExibirFinalizadas;
     private JComboBox comboBox1;
+    private JButton ordenarButton;
 
 
     private List<Tarefa> tarefas;
 
     private TarefaControlador controlador;
 
+    //construtor
     public TelaPrincipal() {
         super();
         tarefas = new ArrayList<>();
-        comboBox1.addItem("Alta");
-        comboBox1.addItem("Média");
         comboBox1.addItem("Baixa");
+        comboBox1.addItem("Média");
+        comboBox1.addItem("Alta");
+
+
+        txtDescricaoTarefa.addActionListener(e->{
+            adicionarTarefa(txtDescricaoTarefa.getText());
+            txtDescricaoTarefa.setText("");
+        });
 
         btnAdicionarTarefa.addActionListener(e -> {
             adicionarTarefa(txtDescricaoTarefa.getText());
             txtDescricaoTarefa.setText("");
         });
+
         chkExibirFinalizadas.addActionListener(e -> {
             boolean selecionado = ((JCheckBox) e.getSource()).isSelected();
             controlador.exibirFinalizadas(selecionado);
         });
-
+        ordenarButton.addActionListener(e -> {
+            controlador.organizarPorUrgencia();
+        });
 
         tblTarefas.getColumnModel().getColumn(2).setCellRenderer(new CorRenderer());
 
         //Alteração visual
         txtDescricaoTarefa.putClientProperty("JComponent.roundRect", true);
         txtDescricaoTarefa.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+
         btnAdicionarTarefa.setFocusPainted(false);
         btnAdicionarTarefa.setBackground(new Color(60, 130, 200));
         btnAdicionarTarefa.setForeground(Color.WHITE);
         btnAdicionarTarefa.setBorder(BorderFactory.createEmptyBorder(8, 16, 8, 16));
+
+        ordenarButton.setFocusPainted(false);
+        ordenarButton.setBackground(new Color(60, 130, 200));
+        ordenarButton.setForeground(Color.WHITE);
+        ordenarButton.setBorder(BorderFactory.createEmptyBorder(8, 16, 8, 16));
+
         pnlMain.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         pnlAdicionar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-
-
 
     }
 
     private void adicionarTarefa(String texto) {
         String urg = (String) comboBox1.getSelectedItem();
 
-         int urgencia = 3;
+        int urgencia = 3;
 
-         if (urg.equals("Alta")) {
-             urgencia = 1;
-         }
-        else if (urg.equals("Média")) {
-             urgencia = 2;
-         } else urgencia = 3;
+        if (urg.equals("Alta")) {
+            urgencia = 1;
+        } else if (urg.equals("Média")) {
+            urgencia = 2;
+        } else urgencia = 3;
 
 
         Tarefa tarefa = new Tarefa(texto, tarefas.size(), urgencia);
@@ -94,8 +108,5 @@ public class TelaPrincipal {
 
         tblTarefas.setDefaultRenderer(Object.class, new CorRenderer());
         tblTarefas.getColumnModel().getColumn(0).setMaxWidth(20);
-
-
     }
-
 }
